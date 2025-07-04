@@ -1,0 +1,2 @@
+MinterContract proxy address:  0xd432fd49e36024a9D864851D8E709a5c7cc6c077
+MinterContract implementation contract address:  0x42a2b3d6e3481c19CF3655855C8c86941CE9246d
