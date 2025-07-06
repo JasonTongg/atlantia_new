@@ -10,10 +10,13 @@ async function deploy() {
 	const gasPrice = hre.ethers.parseUnits("1", "gwei");
 
 	const networkConfig = hre.network.config;
+	console.log(
+		`Deploying to network: ${networkConfig.chainId} - ${networkConfig.url}`
+	);
 	const fordefiProvider = new FordefiWeb3Provider({
 		address: myAddress,
-		apiUserToken: "<api-user-access-token>",
-		apiPayloadSignKey: "<api-user-private-key.pem-file-contents>",
+		apiUserToken: `eyJhbGciOiJFZERTQSIsImtpZCI6ImZ3MFc3aVpocUc0SUEzaXV4ZmhQIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2FwaS5mb3JkZWZpLmNvbS8iLCJzdWIiOiIyYTMzNGI3Ny1lZGI3LTRhMzYtYmViZS03YzQwNTJmYzdkY2ZAZm9yZGVmaSIsImF1ZCI6WyJodHRwczovL2FwaS5mb3JkZWZpLmNvbS9hcGkvIl0sImV4cCI6MjA2Njk4NzYwMCwiaWF0IjoxNzUxNjI3NjAwLCJqdGkiOiI3MDc0M2FhNi01ODcyLTQ2NjktYWQ3Yi03ZDlmNjE3NWY0N2QifQ.qsUvsnEPdyOAYVltidezhHBZbeTELK36NFaoxZn5uV4nem71jiVQjyVMHeme9LNtEgE07uzG1YuYYDDi3B_mDQ`,
+		apiPayloadSignKey: `MHcCAQEEIJYPTW3kNEgQIuhrKwEdtW3Khx1GRSkki6jRxdOAcR0uoAoGCCqGSM49AwEHoUQDQgAE1rurBEFo004+vSwxq1J0ocuL67AYf96FPi0tRwfc2ZBuGSf/B9l+PAkTbltwl4QlZUNWfpjRqpleT+WnnJh8aQ==`,
 		chainId: networkConfig.chainId,
 		rpcUrl: networkConfig.url,
 	});
