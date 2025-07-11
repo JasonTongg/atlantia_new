@@ -81,19 +81,13 @@ async function burn() {
 
 	const tierContract = await hre.ethers.getContractAt("NFT", tier2);
 
-	for (let i = 0; i <= 19; i++) {
-		const tx = await tierContract.safeTransferFrom(
-			myAddress,
-			"0x000000000000000000000000000000000000dEaD",
-			i,
-			{
-				gasPrice: hre.ethers.parseUnits("1000", "gwei"),
-				gasLimit: 500_000,
-			}
-		);
-		await tx.wait();
-		console.log("Burn Success: ", tx.hash);
-	}
+	const tx = await tierContract.safeTransferFrom(
+		myAddress,
+		"0x000000000000000000000000000000000000dEaD",
+		19
+	);
+	await tx.wait();
+	console.log("Burn Success: ", tx.hash);
 }
 
 async function mint() {
@@ -217,7 +211,7 @@ async function mint() {
 	const isSold2 = await factory.sold(messageHash);
 	console.log("Is Sold: ", isSold2);
 }
-burn().catch((error) => {
+mint().catch((error) => {
 	console.error("callInitialize", error);
 	process.exitCode = 1;
 });
