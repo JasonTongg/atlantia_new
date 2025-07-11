@@ -30,8 +30,11 @@ module.exports = {
 			// },
 		},
 		hela: {
-			url: "https://mainnet-rpc.helachain.com",
-			chainId: 8668
+			url: "https://testnet-rpc.helachain.com",
+			chainId: 666888,
+			accounts: [
+				"27a529bad9848d28dde6e49089e410cb34470ac0071fbb4faf3dee5b5119aab6",
+			],
 		},
 		// mainnet: {
 		//   url: "https://mainnet-rpc.helachain.com",
