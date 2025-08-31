@@ -83,7 +83,7 @@ contract MinterContract is
     function mint(
         uint256 _tierID,
         address _to,
-        string calldata _uri,
+        // string calldata _uri,
         bytes32 _messageHash,
         bytes memory _signature,
         uint _qty
@@ -97,7 +97,8 @@ contract MinterContract is
         if (tier == address(0)) revert InvalidTierID("Tier ID does not exist!");
 
         sold[_messageHash] = true;
-        uint256 tokenId = NFT(tier).mint(_to, _uri, _qty);
+        // uint256 tokenId = NFT(tier).mint(_to, _uri, _qty);
+        uint256 tokenId = NFT(tier).mint(_to, _qty);
         userNonces[_to]++;
         emit NewTokenMinted(_to, tier, tokenId);
     }

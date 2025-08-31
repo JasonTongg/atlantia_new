@@ -30,10 +30,8 @@ async function getContractWithFordefi() {
 }
 
 async function addTier() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
+
 	const hasRole = await factory.hasRole(
 		await factory.DEFAULT_ADMIN_ROLE(),
 		fordefiVaultAddress
@@ -54,10 +52,7 @@ async function addTier() {
 }
 
 async function setPublicKey() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 	const tx = await factory.setPublicKey(myAddress);
 	await tx.wait();
 
@@ -67,10 +62,7 @@ async function setPublicKey() {
 }
 
 async function setName() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tierAddress = await factory.getTiersCollections();
 	const tier0Address = tierAddress[0];
@@ -86,10 +78,7 @@ async function setName() {
 }
 
 async function setSymbol() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tierAddress = await factory.getTiersCollections();
 	const tier0Address = tierAddress[0];
@@ -105,10 +94,7 @@ async function setSymbol() {
 }
 
 async function burn() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tiers = await factory.getTiersCollections();
 	const tier = tiers[0];
@@ -121,10 +107,7 @@ async function burn() {
 }
 
 async function burnBatch() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tiers = await factory.getTiersCollections();
 	const tier = tiers[0];
@@ -203,7 +186,7 @@ async function mint() {
 			"gwei"
 		);
 
-		tx = await factory.mint(0, myAddress, messageHash, signature, 15);
+		tx = await factory.mint(0, myAddress, messageHash, signature, 20);
 		await tx.wait();
 		console.log("✅ Minted!");
 	} catch (e) {
@@ -257,13 +240,17 @@ async function checkRole() {
 		myAddress
 	);
 	console.log("My wallet is admin?", hasRole2);
+	const hasRole3 = await factory.hasRole(
+		await factory.DEFAULT_ADMIN_ROLE(),
+		fordefiVaultAddress
+	);
+	console.log("Fordefi vault is admin?", hasRole3);
+	await tx.wait();
+	console.log("Contract initialized!");
 }
 
 async function getTokenURI() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tierAddress = await factory.getTiersCollections();
 	const tier0Address = tierAddress[0];
@@ -276,10 +263,7 @@ async function getTokenURI() {
 }
 
 async function setBaseURI() {
-	const factory = await hre.ethers.getContractAt(
-		"MinterContract",
-		contractAddress
-	);
+	const factory = await getContractWithFordefi();
 
 	const tierAddress = await factory.getTiersCollections();
 	const tier0Address = tierAddress[0];
@@ -352,7 +336,7 @@ async function getDetails() {
 	console.log(`🚦 Contract is ${isPaused ? "⛔ PAUSED" : "✅ NOT paused"}`);
 }
 
-getDetails().catch((error) => {
+mint().catch((error) => {
 	console.error("failed:", error);
 	process.exitCode = 1;
 });

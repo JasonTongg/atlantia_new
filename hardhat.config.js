@@ -36,10 +36,13 @@ module.exports = {
 				"27a529bad9848d28dde6e49089e410cb34470ac0071fbb4faf3dee5b5119aab6",
 			],
 		},
-		// mainnet: {
-		//   url: "https://mainnet-rpc.helachain.com",
-		//   accounts: [process.env.PRIVATEKEY_MAIN],
-		// },
+		mainnet: {
+			url: "https://mainnet-rpc.helachain.com",
+			chainId: 8668,
+			accounts: [
+				"27a529bad9848d28dde6e49089e410cb34470ac0071fbb4faf3dee5b5119aab6",
+			],
+		},
 	},
 	etherscan: {
 		apiKey: {
